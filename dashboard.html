@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kripto HTS AI - Monitoring Dashboard</title>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background: #1a1a1a; 
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+        }
+        .metric-card {
+            background: #2a2a2a;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px;
+            display: inline-block;
+            min-width: 200px;
+        }
+        .alert {
+            background: #ff4444;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+        .healthy { color: #44ff44; }
+        .degraded { color: #ffaa44; }
+        .critical { color: #ff4444; }
+    </style>
+</head>
+<body>
+    <h1>🚀 Kripto HTS AI Monitoring Dashboard</h1>
+    
+    <div id="health-status"></div>
+    <div id="system-metrics"></div>
+    <div id="active-alerts"></div>
+    <div id="performance-chart"></div>
+    
+    <script>
+        const socket = io();
+        
+        socket.on('connect', function() {
+            console.log('Connected to monitoring server');
+            socket.emit('subscribe_metrics', {type: 'all'});
+        });
+        
+        socket.on('system_metrics', function(data) {
+            updateSystemMetrics(data);
+        });
+        
+        socket.on('new_alert', function(alert) {
+            displayAlert(alert);
+        });
+        
+        function updateSystemMetrics(metrics) {
+            document.getElementById('system-metrics').innerHTML = `
+                <div class="metric-card">
+                    <h3>CPU</h3>
+                    <p>${metrics.cpu_percent}%</p>
+                </div>
+                <div class="metric-card">
+                    <h3>Memory</h3>
+                    <p>${metrics.memory_percent}%</p>
+                </div>
+            `;
+        }
+        
+        function displayAlert(alert) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = 'alert';
+            alertDiv.innerHTML = `${alert.type}: ${alert.message}`;
+            document.getElementById('active-alerts').appendChild(alertDiv);
+        }
+        
+        // Fetch initial data
+        fetch('/api/health')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('health-status').innerHTML = 
+                    `<h2>System Health: <span class="${data.status}">${data.status.toUpperCase()}</span></h2>`;
+            });
+    </script>
+</body>
+</html>

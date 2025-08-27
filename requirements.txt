@@ -1,0 +1,53 @@
+# Temel kütüphaneler
+python-dotenv==1.0.0
+pandas==2.1.4
+numpy==1.26.2
+asyncio==3.4.3
+
+# Web scraping ve API
+requests==2.31.0
+aiohttp==3.9.1
+beautifulsoup4==4.12.2
+scrapy==2.11.0
+
+# Doğal Dil İşleme (NLP)
+nltk==3.8.1
+spacy==3.7.2
+textblob==0.17.1
+transformers==4.36.2
+torch==2.1.2
+
+# Makine Öğrenmesi
+scikit-learn==1.3.2
+tensorflow==2.15.0
+xgboost==2.0.3
+joblib==1.3.2
+
+# Teknik Analiz
+ta-lib==0.4.28
+yfinance==0.2.33
+
+# Veritabanı
+sqlalchemy==2.0.23
+sqlite3
+psycopg2-binary==2.9.9
+
+# Kripto API'ler
+python-binance==1.0.19
+pycoingecko==3.1.0
+
+# Bildirim Sistemleri
+python-telegram-bot==20.7
+discord.py==2.3.2
+
+# Görselleştirme (opsiyonel)
+matplotlib==3.8.2
+plotly==5.18.0
+dash==2.14.2
+
+# Diğer yardımcı kütüphaneler
+python-dateutil==2.8.2
+pytz==2023.3
+schedule==1.2.0
+redis==5.0.1
+celery==5.3.4

@@ -1,0 +1,29 @@
+ai_models:
+  ner:
+    spacy_model: "en_core_web_lg"
+    huggingface_model: "dslim/bert-base-NER"
+    confidence_threshold: 0.7
+    
+  sentiment:
+    financial: "ProsusAI/finbert"
+    crypto: "ElKulako/cryptobert"
+    general: "cardiffnlp/twitter-roberta-base-sentiment-latest"
+    
+  topic_modeling:
+    method: "hybrid"  # lda, nmf, bertopic, hybrid
+    n_topics: 10
+    coherence_threshold: 0.4
+    
+  impact_scoring:
+    magnitude_weights:
+      event_type: 0.4
+      sentiment: 0.3
+      entity_importance: 0.2
+      text_length: 0.1
+    
+  credibility:
+    source_tiers:
+      tier1: ["reuters", "bloomberg", "wsj"]
+      tier2: ["coindesk", "theblock"]
+      tier3: ["cointelegraph", "cryptonews"]
+    fact_check_enabled: true

@@ -1,0 +1,24 @@
+exchanges:
+  binance:
+    api_key: "YOUR_KEY"
+    secret: "YOUR_SECRET"
+    futures: true
+
+risk_limits:
+  max_position_size: 1000
+  max_daily_loss: 0.05
+  max_leverage: 3
+
+ml_models:
+  ensemble_weights:
+    lstm: 0.35
+    transformer: 0.35
+    tft: 0.30
+
+social_sources:
+  reddit:
+    enabled: true
+    subreddits: ['cryptocurrency', 'bitcoin']
+  discord:
+    enabled: true
+    bot_token: "YOUR_TOKEN"

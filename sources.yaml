@@ -1,0 +1,51 @@
+data_sources:
+  apis:
+    coindesk:
+      enabled: true
+      api_key: null
+      rate_limit: 100
+      priority: 5
+    
+    newsapi:
+      enabled: true
+      api_key: "YOUR_KEY"
+      rate_limit: 500
+      priority: 4
+  
+  rss_feeds:
+    - name: CoinDesk
+      url: "https://www.coindesk.com/arc/outboundfeeds/rss/"
+      categories: ["crypto", "news"]
+      priority: 5
+    
+    - name: BTCHaber
+      url: "https://www.btchaber.com/feed/"
+      language: "tr"
+      categories: ["crypto", "turkish"]
+      priority: 3
+  
+  scraping:
+    reuters:
+      enabled: true
+      respect_robots: true
+      rate_limit: 30
+      use_selenium: false
+    
+    bloomberg:
+      enabled: true
+      respect_robots: true
+      rate_limit: 20
+      use_selenium: true
+  
+  social_media:
+    twitter:
+      enabled: true
+      bearer_token: "YOUR_TOKEN"
+      keywords: ["bitcoin", "ethereum", "crypto"]
+      max_results: 100
+    
+    reddit:
+      enabled: true
+      client_id: "YOUR_CLIENT_ID"
+      client_secret: "YOUR_SECRET"
+      subreddits: ["cryptocurrency", "bitcoin"]

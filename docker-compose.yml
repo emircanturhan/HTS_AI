@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  kripto-hts-ai:
+    build: .
+    container_name: kripto_hts_ai
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./models:/app/models
+    networks:
+      - kripto-network
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: kripto_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: kripto_hts_ai
+      POSTGRES_USER: ${DB_USER:-kripto}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-secretpassword}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - kripto-network
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7-alpine
+    container_name: kripto_redis
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    networks:
+      - kripto-network
+    ports:
+      - "6379:6379"
+
+  # Görselleştirme Dashboard (opsiyonel)
+  grafana:
+    image: grafana/grafana:latest
+    container_name: kripto_grafana
+    restart: unless-stopped
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin}
+    volumes:
+      - grafana_data:/var/lib/grafana
+    networks:
+      - kripto-network
+    ports:
+      - "3000:3000"
+
+networks:
+  kripto-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data:
+  grafana_data:
