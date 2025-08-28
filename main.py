@@ -1,19 +1,36 @@
 import asyncio
-from src.core.kripto_hts_ai import KriptoHTSAI
-from src.trading.automated_trading_execution import AutomatedTradingExecutor
-from src.risk.portfolio_risk_management import ModernPortfolioOptimizer
+import os
+from dotenv import load_dotenv
+
+# .env dosyasını yükle
+load_dotenv()
+
+# Artık Python'un 'src' klasörünü göreceğini varsayarak,
+# doğru dosya adlarından import yapıyoruz.
+from Kripto_HTS_AI import KriptoHTSAI
+from automated_trading_execution import AutomatedTradingExecutor
+from portfolio_risk_management import ModernPortfolioOptimizer
 
 async def main():
-    # Initialize components
+    # .env dosyasından okunan exchange konfigürasyonları
+    exchange_configs = {
+        'binance': {
+            'api_key': os.getenv('BINANCE_API_KEY'),
+            'secret': os.getenv('BINANCE_API_SECRET'),
+            'futures': True
+        }
+    }
+
+    # Bileşenleri başlat
     app = KriptoHTSAI()
     trader = AutomatedTradingExecutor(exchange_configs)
     optimizer = ModernPortfolioOptimizer()
     
-    # Start all systems
+    # Tüm sistemleri başlat
     tasks = [
         app.start(),
         trader.manage_positions(),
-        # Add more tasks
+        # Gelecekte eklenecek diğer görevler
     ]
     
     await asyncio.gather(*tasks)
