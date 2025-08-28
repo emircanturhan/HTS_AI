@@ -29,7 +29,6 @@ yfinance==0.2.33
 
 # Veritabanı
 sqlalchemy==2.0.23
-sqlite3
 psycopg2-binary==2.9.9
 
 # Kripto API'ler

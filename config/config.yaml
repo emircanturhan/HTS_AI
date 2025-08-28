@@ -5,9 +5,9 @@ exchanges:
     futures: true
 
 risk_limits:
-  max_position_size: 1000
-  max_daily_loss: 0.05
-  max_leverage: 3
+  max_position_size: 10
+  max_daily_loss: 10
+  max_leverage: 10
 
 ml_models:
   ensemble_weights:
